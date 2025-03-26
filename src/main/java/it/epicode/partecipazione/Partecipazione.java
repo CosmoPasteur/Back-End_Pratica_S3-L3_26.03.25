@@ -3,11 +3,23 @@ package it.epicode.partecipazione;
 import it.epicode.enums.Stato;
 import it.epicode.evento.Evento;
 import it.epicode.persona.Persona;
+import jakarta.persistence.*;
 
+
+@Entity
+@Table(name = "partecipazioni")
 public class Partecipazione {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
+
+    @Column(length = 100, nullable = false)
     private Persona persona;
+
     private Evento evento;
+
+    @Column(nullable = false)
     private Stato stato;
 
     public Partecipazione(long id, Persona persona, Evento evento, Stato stato) {

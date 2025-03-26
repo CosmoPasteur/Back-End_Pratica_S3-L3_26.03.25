@@ -1,9 +1,12 @@
 package it.epicode.persona;
 
 import it.epicode.enums.Sesso;
+import it.epicode.evento.Evento;
+import it.epicode.partecipazione.Partecipazione;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "persone")
@@ -91,7 +94,7 @@ public class Persona {
     }
 
     public String getListaPartecipazioni() {
-        return listaPartecipazioni;
+        return listaPartecipazioni.toString();
     }
 
     public void setListaPartecipazioni(String listaPartecipazioni) {

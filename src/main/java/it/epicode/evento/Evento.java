@@ -17,7 +17,7 @@ public class Evento {
     private LocalDate dataEvento;
     @Column(length = 1000, nullable = false)
     private String descrizione;
-    @Column(length = 100)
+
     private String tipoEvento;
     private int numeroMassimoPartecipanti;
 
