@@ -9,18 +9,20 @@ public class EventoDAO {
         this.em = em;
     }
 
-    public void save(Evento evento) {
-        em.persist(evento);
+    public void insert(Evento e) {
+        em.persist(e);
     }
 
-    public Evento getById(Long id) {
+    public void update(Evento e) {
+        em.merge(e);
+    }
+
+    public void delete(Long id) {
+        Evento e = findById(id);
+        em.remove(e);
+    }
+
+    public Evento findById(Long id) {
         return em.find(Evento.class, id);
     }
-
-    public void delete(Evento evento) {
-        em.remove(evento);
-    }
-
-
-
 }

@@ -1,8 +1,8 @@
-package it.epicode.partecipazione;
+package it.epicode.partecipazioni;
 
 import it.epicode.enums.Stato;
 import it.epicode.evento.Evento;
-import it.epicode.persona.Persona;
+import it.epicode.persone.Persona;
 import jakarta.persistence.*;
 
 
@@ -14,13 +14,15 @@ public class Partecipazione {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
 
-    @Column(length = 100, nullable = false)
+    @ManyToOne
     private Persona persona;
 
+    @ManyToOne
     private Evento evento;
 
-    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private Stato stato;
+
 
     public Partecipazione(long id, Persona persona, Evento evento, Stato stato) {
         this.id = id;
@@ -62,15 +64,5 @@ public class Partecipazione {
 
     public void setStato(Stato stato) {
         this.stato = stato;
-    }
-
-    @Override
-    public String toString() {
-        return "Partecipazione{" +
-                "id=" + id +
-                ", persona=" + persona +
-                ", evento=" + evento +
-                ", stato=" + stato +
-                '}';
     }
 }

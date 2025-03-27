@@ -1,11 +1,11 @@
-package it.epicode.persona;
+package it.epicode.persone;
 
 import it.epicode.enums.Sesso;
-import it.epicode.evento.Evento;
-import it.epicode.partecipazione.Partecipazione;
+import it.epicode.partecipazioni.Partecipazione;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,15 +22,16 @@ public class Persona {
     @Column(length = 50, nullable = false)
     private String cognome;
 
-    @Column(length = 50)
+    @Column(length = 100, nullable = false)
     private String email;
 
-    @Column(length = 50)
     private LocalDate dataNascita;
 
-    @Column(length = 1)
+    @Enumerated(EnumType.STRING)
     private Sesso sesso;
-    private String listaPartecipazioni;
+
+    @OneToMany(mappedBy = "persona")
+    List<Partecipazione> listaPartecipazioni = new ArrayList<>();
 
     public Persona(long id, String nome, String cognome, String email, LocalDate dataNascita, Sesso sesso, String listaPartecipazioni) {
         this.id = id;
@@ -93,24 +94,13 @@ public class Persona {
         this.sesso = sesso;
     }
 
-    public String getListaPartecipazioni() {
-        return listaPartecipazioni.toString();
+    public List<Partecipazione> getListaPartecipazioni() {
+        return listaPartecipazioni;
     }
 
-    public void setListaPartecipazioni(String listaPartecipazioni) {
+    public void setListaPartecipazioni(List<Partecipazione> listaPartecipazioni) {
         this.listaPartecipazioni = listaPartecipazioni;
     }
 
-    @Override
-    public String toString() {
-        return "Persona{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", cognome='" + cognome + '\'' +
-                ", email='" + email + '\'' +
-                ", dataNascita=" + dataNascita +
-                ", sesso=" + sesso +
-                ", listaPartecipazioni='" + listaPartecipazioni + '\'' +
-                '}';
-    }
+
 }

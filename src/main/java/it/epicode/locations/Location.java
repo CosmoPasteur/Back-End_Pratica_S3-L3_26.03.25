@@ -1,20 +1,33 @@
-package it.epicode.location;
+package it.epicode.locations;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import it.epicode.evento.Evento;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "locations")
 public class Location {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
+
+    @Column(length = 100, nullable = false)
     private String nome;
+
+    @Column(length = 100, nullable = false)
     private String citta;
+
+    @OneToMany(mappedBy = "location")
+    private List<Evento> eventi = new ArrayList<>();
 
     public Location(long id, String nome, String citta) {
         this.id = id;
         this.nome = nome;
         this.citta = citta;
+        this.eventi = eventi;
     }
 
     public Location() {
@@ -42,15 +55,6 @@ public class Location {
 
     public void setCitta(String citta) {
         this.citta = citta;
-    }
-
-    @Override
-    public String toString() {
-        return "Location{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", citta='" + citta + '\'' +
-                '}';
     }
 }
 
